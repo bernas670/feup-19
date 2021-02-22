@@ -5,29 +5,24 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
 
-    [SerializeField] private Transform stage;
-    [SerializeField] private float speed = 10f;
+    [SerializeField] public GameObject stage;
+    [SerializeField] public GameObject startingStage;
+    [SerializeField] public float speed = 10f;
 
-
-
-    private Transform currentStage, nextStage;
+    private GameObject firstStage, secondStage, thirdStage;
+    private Transform firstTransform, secondTransform, thirdTransform;
+    private float stageWidth = 20f; // Not the actual width, but works well
 
     void Awake()
     {
-        // currentStage = stage;
-        currentStage = loadStage(stage, new Vector3(0, 0, 0));
+        firstStage = startingStage;
+        firstTransform = startingStage.GetComponent<Transform>();
 
+        secondStage = loadStage(stage, getSpawnPositionFrom(firstTransform));
+        secondTransform = secondStage.GetComponent<Transform>();
 
-        // Vector3 nextSpawn = new Vector3(currentStage.GetChild(0).position.x, 0, 0);
-
-
-
-        
-
-
-        // nextStage = loadStage(stage, nextSpawn);
-
-        // loadStage(currentStage, new Vector3(0, 0, 0));
+        thirdStage = loadStage(stage, getSpawnPositionFrom(secondTransform));
+        thirdTransform = thirdStage.GetComponent<Transform>();
     }
 
     // Start is called before the first frame update
@@ -44,11 +39,35 @@ public class LevelGenerator : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentStage.Translate(Vector3.left * speed * Time.deltaTime);
+        firstTransform.Translate(Vector3.left * speed * Time.deltaTime);
+        secondTransform.Translate(Vector3.left * speed * Time.deltaTime);
+        thirdTransform.Translate(Vector3.left * speed * Time.deltaTime);
+
+        // When the first stage leaves the screen (with a small offset)
+        // it is deleted.Remaining stages are shifted to the left and a
+        // new thirdStage is instantiated
+        if (firstTransform.Find("EndPosition").position.x < (-stageWidth / 2))
+        {
+            Destroy(firstStage);
+            Debug.Log("Stage Destroyed!");
+
+            firstStage = secondStage;
+            firstTransform = secondTransform;
+
+            secondStage = thirdStage;
+            secondTransform = thirdTransform;
+
+            thirdStage = loadStage(stage, getSpawnPositionFrom(secondTransform));
+            thirdTransform = thirdStage.GetComponent<Transform>();
+        }
     }
 
-    Transform loadStage(Transform stage, Vector3 spawnPosition)
+    GameObject loadStage(GameObject prefab, Vector3 spawnPosition)
     {
-        return Instantiate(stage, spawnPosition, Quaternion.identity);
+        return Instantiate(prefab, spawnPosition, Quaternion.identity);
+    }
+
+    Vector3 getSpawnPositionFrom(Transform transf) {
+        return transf.Find("EndPosition").position + new Vector3(stageWidth / 2, 0, 0);
     }
 }
