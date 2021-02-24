@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // rb.AddForce( ,ForceMode2D.Impulse);
         rb.velocity = transform.right * speed;
     }
 
