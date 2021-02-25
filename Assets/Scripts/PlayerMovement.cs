@@ -10,13 +10,18 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
 
 
+    public BoxCollider2D runColl, crouchColl;
+
+
     public float jumpForce = 5f;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    private bool crouching = false;
 
+    void Awake()
+    {
+        runColl.enabled = true;
+        crouchColl.enabled = false;
     }
 
     // Update is called once per frame
@@ -28,24 +33,53 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
+        if (Input.GetButtonDown("Crouch"))
+        {
+            Crouch();
+        }
+        else if (Input.GetButtonUp("Crouch"))
+        {
+            Uncrouch();
+        }
+
     }
 
-    private void FixedUpdate()
-    {
 
+    private void Crouch()
+    {
+        if (crouching)
+        {
+            return;
+        }
+
+        crouching = true;
+
+        runColl.enabled = false;
+        crouchColl.enabled = true;
+    }
+
+    private void Uncrouch()
+    {
+        if (!crouching)
+        {
+            return;
+        }
+
+        crouching = false;
+
+        runColl.enabled = true;
+        crouchColl.enabled = false;
     }
 
 
     private void Jump()
     {
-        if (IsOnGround())
+        if (!IsOnGround())
         {
-            // Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
-            // rb.velocity = movement;
-
-            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            return;
         }
 
+        rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
     }
 
     private bool IsOnGround()

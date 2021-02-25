@@ -27,7 +27,6 @@ public class Weapon : MonoBehaviour
 
         firePoint.eulerAngles = new Vector3(0, 0, ang);
 
-
         if (Input.GetButtonDown("Fire1")) {
             Shoot();
         }
