@@ -7,11 +7,12 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D rb;
     public Transform feet;
+    public Transform firePoint;
     public LayerMask groundLayer;
 
 
     public BoxCollider2D runColl, crouchColl;
-
+    public Animator animator;
 
     public float jumpForce = 5f;
 
@@ -53,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         crouching = true;
+        animator.SetBool("isCrouching", true);
+        firePoint.position = new Vector3(firePoint.position.x, firePoint.position.y - 0.5f, firePoint.position.z);
 
         runColl.enabled = false;
         crouchColl.enabled = true;
@@ -66,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         crouching = false;
+        animator.SetBool("isCrouching", false);
+        firePoint.position = new Vector3(firePoint.position.x, firePoint.position.y + 0.5f, firePoint.position.z);
 
         runColl.enabled = true;
         crouchColl.enabled = false;
