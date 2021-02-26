@@ -21,6 +21,11 @@ public class EnemyProjectile : MonoBehaviour
             return;
         }
         
+        PlayerHealth player = hitInfo.GetComponent<PlayerHealth>();
+        if (player) {
+            player.TakeDamage();
+        }
+
         Destroy(gameObject);
     }
 
