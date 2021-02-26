@@ -5,8 +5,48 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
 
-    public void TakeDamage() {
+    private GameObject player;
+
+    // fire rate in shots per second
+    public float fireRate = 3f;
+    public GameObject projectile;
+    private float lastShot;
+
+    private Renderer rndr;
+
+    void Awake()
+    {
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        rndr = GetComponent<Renderer>();
+
+        lastShot = 1 / fireRate;
+    }
+
+    void FixedUpdate()
+    {
+        if (rndr.isVisible)
+        {
+            if (lastShot >= 1 / fireRate)
+            {
+                Shoot();
+                lastShot = 0f;
+            }
+
+            lastShot += Time.deltaTime;
+        }
+    }
+
+    public void TakeDamage()
+    {
         Destroy(gameObject);
     }
 
+    void Shoot()
+    {
+        Vector3 playerDir = (player.transform.position - transform.position).normalized;
+        float ang = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.Euler(0, 0, ang);
+
+        Instantiate(projectile, transform.position, rotation);
+    }
 }
