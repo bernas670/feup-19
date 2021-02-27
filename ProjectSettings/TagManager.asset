@@ -17,11 +17,11 @@ TagManager:
   - 
   - 
   - Ground
-  - Damageable
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - PowerUp
+  - EnemyProjectiles
+  - PlayerProjectiles
+  - Player
   - 
   - 
   - 

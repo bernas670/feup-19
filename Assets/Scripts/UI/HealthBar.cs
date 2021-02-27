@@ -53,7 +53,7 @@ public class HealthBar : MonoBehaviour
         }
 
         for (int i = maxHealth; i < maxHealth + maxShield; i++) {
-            if (i < shield) {
+            if (i < maxHealth + shield) {
                 bar[i].GetComponent<Image>().sprite = fullShield;
             } else {
                 bar[i].GetComponent<Image>().sprite = emptyShield;

@@ -17,10 +17,6 @@ public class EnemyProjectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo) {
-        if (hitInfo.CompareTag("Enemy")) {
-            return;
-        }
-        
         PlayerHealth player = hitInfo.GetComponent<PlayerHealth>();
         if (player) {
             player.TakeDamage();

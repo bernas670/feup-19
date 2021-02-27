@@ -47,6 +47,7 @@ public class EnemyController : MonoBehaviour
         float ang = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, ang);
 
-        Instantiate(projectile, transform.position, rotation);
+        GameObject projectileInst = Instantiate(projectile, transform.position, rotation);
+        projectileInst.transform.SetParent(transform.parent);
     }
 }

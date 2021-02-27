@@ -15,7 +15,8 @@ public class PlayerHealth : MonoBehaviour
 
     public HealthBar healthBar;
 
-    private void Start() {
+    private void Start()
+    {
         healthBar.InitBar(MAX_HEALTH, MAX_SHIELD);
         healthBar.UpdateBar(health, shield);
     }
@@ -33,12 +34,27 @@ public class PlayerHealth : MonoBehaviour
 
         healthBar.UpdateBar(health, shield);
 
-        if (health <= 0) {
-            Die();    
+        if (health <= 0)
+        {
+            Die();
         }
     }
 
-    private void Die() {
+    private void Die()
+    {
         Debug.Log("DEAD");
+    }
+
+    public void AddShield(int amount)
+    {
+        if (shield + amount > MAX_SHIELD)
+        {
+            shield = MAX_SHIELD;
+        }
+        else
+        {
+            shield += amount;
+        }
+        healthBar.UpdateBar(health, shield);
     }
 }
