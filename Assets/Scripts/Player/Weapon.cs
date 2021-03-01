@@ -8,10 +8,13 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
-    // Start is called before the first frame update
-    void Start()
+    // number of shots per second
+    public float fireRate = 3f;
+    private float lastShot;
+
+    void Awake()
     {
-        
+        lastShot = 1 / fireRate;
     }
 
     // Update is called once per frame
@@ -23,12 +26,31 @@ public class Weapon : MonoBehaviour
 
         firePoint.eulerAngles = new Vector3(0, 0, ang);
 
+        lastShot += Time.deltaTime;
+
+
         if (Input.GetButtonDown("Fire1")) {
+            if (lastShot >= 1 / fireRate) {
             Shoot();
+                lastShot = 0;
+            }
         }
     }
 
     void Shoot() {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
+
+    public void ModifyFireRate(float multiplier, float duration) {
+        float originalFireRate = fireRate;
+        fireRate *= multiplier;
+
+        StartCoroutine(ResetFireRate(originalFireRate, duration));
+    }
+
+    private IEnumerator ResetFireRate(float value, float duration) {
+        yield return new WaitForSeconds(duration);
+        fireRate = value;
+    }
+
 }
