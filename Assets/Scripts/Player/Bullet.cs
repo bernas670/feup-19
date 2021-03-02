@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
 
     public float speed = 20f;
     public Rigidbody2D rb;
-
+    public GameObject impactAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,8 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage();
         }
 
+        CreateImpactEffect();
+
         Destroy(gameObject);
     }
 
@@ -31,4 +33,10 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void CreateImpactEffect() {
+        GameObject impactObject = Instantiate(impactAnimation, transform.position, transform.rotation);
+        LevelGenerator level = GameObject.Find("Level").GetComponent<LevelGenerator>();
+        impactObject.transform.SetParent(level.GetCurrentStage());
+        Destroy(impactObject, 0.4f);
+    }
 }

@@ -70,4 +70,8 @@ public class LevelGenerator : MonoBehaviour
     Vector3 getSpawnPositionFrom(Transform transf) {
         return transf.Find("EndPosition").position + new Vector3(stageWidth / 2, 0, 0);
     }
+
+    public Transform GetCurrentStage() {
+        return firstTransform;
+    }
 }
