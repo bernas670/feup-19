@@ -17,9 +17,14 @@ public class EnemyProjectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo) {
-        PlayerHealth player = hitInfo.GetComponent<PlayerHealth>();
-        if (player) {
+
+        if (hitInfo.CompareTag("Player")) {
+            PlayerHealth player = hitInfo.GetComponent<PlayerHealth>();
             player.TakeDamage();
+        }
+        else if (hitInfo.CompareTag("PlayerProjectile")) {
+            PlayerScore score = GameObject.Find("Player").GetComponent<PlayerScore>();
+            score.UpdateScore(10);
         }
 
         Destroy(gameObject);

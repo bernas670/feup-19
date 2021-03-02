@@ -39,6 +39,9 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage()
     {
         Destroy(gameObject);
+
+        PlayerScore score = player.GetComponent<PlayerScore>();
+        score.UpdateScore(100);
     }
 
     void Shoot()
