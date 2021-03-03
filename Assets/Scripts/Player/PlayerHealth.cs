@@ -13,10 +13,12 @@ public class PlayerHealth : MonoBehaviour
     private int shield = 0;
 
     public HealthBar healthBar;
+    private Animator animator;
 
     private void Start()
     {
         healthBar.InitBar(MAX_HEALTH, MAX_SHIELD);
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage()
@@ -25,6 +27,11 @@ public class PlayerHealth : MonoBehaviour
         {
             shield--;
             healthBar.RemoveShield(shield);
+
+            if (shield <= 0)
+            {
+                animator.SetBool("hasShield", false);
+            }
         }
         else
         {
@@ -40,6 +47,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void AddShield()
     {
+        animator.SetBool("hasShield", true);
+
         if (shield < MAX_SHIELD)
         {
             shield++;
