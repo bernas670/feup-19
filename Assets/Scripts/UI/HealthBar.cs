@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
 
         bar = new GameObject[maxHealth + maxShield];
 
-        Vector3 offset = new Vector3(75, 0, 0);
+        Vector3 offset = new Vector3(40, 0, 0);
 
         for (int i = 0; i < maxHealth; i++)
         {
