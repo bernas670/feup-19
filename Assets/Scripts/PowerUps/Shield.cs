@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-
-    private void OnTriggerEnter2D(Collider2D hitInfo) {
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
         PlayerHealth player = hitInfo.GetComponent<PlayerHealth>();
 
-        if (player) {
-            player.AddShield(1);
+        if (player)
+        {
+            player.AddShield();
             Destroy(gameObject);
         }
     }
-
-
 }

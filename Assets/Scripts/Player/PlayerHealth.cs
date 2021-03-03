@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-
     private const int MAX_HEALTH = 3;
     private const int MAX_SHIELD = 2;
 
@@ -18,7 +17,6 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         healthBar.InitBar(MAX_HEALTH, MAX_SHIELD);
-        healthBar.UpdateBar(health, shield);
     }
 
     public void TakeDamage()
@@ -26,13 +24,13 @@ public class PlayerHealth : MonoBehaviour
         if (shield > 0)
         {
             shield--;
+            healthBar.RemoveShield(shield);
         }
         else
         {
             health--;
+            healthBar.RemoveHealth(health);
         }
-
-        healthBar.UpdateBar(health, shield);
 
         if (health <= 0)
         {
@@ -40,21 +38,17 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void AddShield()
+    {
+        if (shield < MAX_SHIELD)
+        {
+            shield++;
+            healthBar.AddShield(shield - 1);
+        }
+    }
+
     private void Die()
     {
         Debug.Log("DEAD");
-    }
-
-    public void AddShield(int amount)
-    {
-        if (shield + amount > MAX_SHIELD)
-        {
-            shield = MAX_SHIELD;
-        }
-        else
-        {
-            shield += amount;
-        }
-        healthBar.UpdateBar(health, shield);
     }
 }

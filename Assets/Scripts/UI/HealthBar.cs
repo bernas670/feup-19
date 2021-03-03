@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-
-    public GameObject icon;
-    public Sprite fullHeart, emptyHeart;
-    public Sprite fullShield, emptyShield;
+    public int offset = 40;
+    public GameObject iconPrefab;
+    public Sprite fullHeart, emptyHeart, fullShield;
 
     private int maxHealth, maxShield;
     private GameObject[] bar;
@@ -20,44 +19,36 @@ public class HealthBar : MonoBehaviour
 
         bar = new GameObject[maxHealth + maxShield];
 
-        Vector3 offset = new Vector3(40, 0, 0);
+        Vector3 offsetVector = new Vector3(offset, 0, 0);
 
         for (int i = 0; i < maxHealth; i++)
         {
-            GameObject newIcon = CreateIcon(offset * i, emptyHeart);
+            GameObject newIcon = CreateIcon(offsetVector * i, fullHeart);
             bar.SetValue(newIcon, i);
-        }
-
-        for (int i = 0; i < maxShield; i++)
-        {
-            GameObject newIcon = CreateIcon(offset * (i + maxHealth), emptyShield);
-            bar.SetValue(newIcon, i + maxHealth);
         }
     }
 
-    private GameObject CreateIcon(Vector3 offset, Sprite sprite) {
-        GameObject icon = Instantiate(this.icon, this.icon.transform.position + offset, Quaternion.identity);
+    public void RemoveHealth(int index)
+    {
+        bar[index].GetComponent<Image>().sprite = emptyHeart;
+    }
+
+    public void AddShield(int index)
+    {
+        int shieldIndex = index + maxHealth;
+        bar.SetValue(CreateIcon(new Vector3(offset, 0, 0) * shieldIndex, fullShield), shieldIndex);
+    }
+
+    public void RemoveShield(int index)
+    {
+        Destroy(bar[index + maxHealth]);
+    }
+
+    private GameObject CreateIcon(Vector3 offset, Sprite sprite)
+    {
+        GameObject icon = Instantiate(iconPrefab, iconPrefab.transform.position + offset, Quaternion.identity);
         icon.transform.SetParent(transform, false);
         icon.GetComponent<Image>().sprite = sprite;
         return icon;
     }
-
-    public void UpdateBar(int health, int shield)
-    {
-        for (int i = 0; i < maxHealth; i++) {
-            if (i < health) {
-                bar[i].GetComponent<Image>().sprite = fullHeart;
-            } else {
-                bar[i].GetComponent<Image>().sprite = emptyHeart;
-            }
-        }
-
-        for (int i = maxHealth; i < maxHealth + maxShield; i++) {
-            if (i < maxHealth + shield) {
-                bar[i].GetComponent<Image>().sprite = fullShield;
-            } else {
-                bar[i].GetComponent<Image>().sprite = emptyShield;
-            }
-        }
-    }   
 }
