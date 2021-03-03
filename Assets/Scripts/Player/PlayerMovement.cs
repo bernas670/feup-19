@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D rb;
     public Transform feet;
+    public Transform head;
     public Transform firePoint;
     public LayerMask groundLayer;
 
@@ -16,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce = 5f;
 
-
     private bool crouching = false;
+    private bool wantToStandUp = false;
 
     void Awake()
     {
@@ -28,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -40,9 +40,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetButtonUp("Crouch"))
         {
-            Uncrouch();
+            wantToStandUp = true;
         }
 
+        if(wantToStandUp && CanStandUp()) {
+            Uncrouch();
+            wantToStandUp = false;
+        }
     }
 
 
@@ -97,5 +101,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return false;
+    }
+
+    private bool CanStandUp()
+    {
+        Collider2D ceilingCheck = Physics2D.OverlapCircle(head.position, 0.1f, groundLayer);
+
+        if (ceilingCheck != null)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
