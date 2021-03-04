@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
         crouching = true;
         animator.SetBool("isCrouching", true);
-        firePoint.position = new Vector3(firePoint.position.x, firePoint.position.y - 0.5f, firePoint.position.z);
+        firePoint.position = new Vector3(firePoint.position.x + 0.052f, firePoint.position.y - 0.026f, firePoint.position.z);
 
         runColl.enabled = false;
         crouchColl.enabled = true;
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
         crouching = false;
         animator.SetBool("isCrouching", false);
-        firePoint.position = new Vector3(firePoint.position.x, firePoint.position.y + 0.5f, firePoint.position.z);
+        firePoint.position = new Vector3(firePoint.position.x - 0.052f, firePoint.position.y + 0.026f, firePoint.position.z);
 
         runColl.enabled = true;
         crouchColl.enabled = false;
