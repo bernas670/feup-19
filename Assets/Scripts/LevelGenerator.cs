@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-
     [SerializeField] public GameObject stage;
     [SerializeField] public GameObject startingStage;
     [SerializeField] public float speed = 10f;
@@ -23,18 +22,6 @@ public class LevelGenerator : MonoBehaviour
 
         thirdStage = loadStage(stage, getSpawnPositionFrom(secondTransform));
         thirdTransform = thirdStage.GetComponent<Transform>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void FixedUpdate()

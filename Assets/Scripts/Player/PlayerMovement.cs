@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce = 5f;
 
+    private bool jumping = false;
+    private bool falling = false;
     private bool crouching = false;
     private bool wantToStandUp = false;
 
@@ -33,6 +35,16 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+        
+        if (jumping)
+        {
+            CheckFalling();
+        }
+
+        if (falling && IsOnGround())
+        {
+            Land();
+        }
 
         if (Input.GetButtonDown("Crouch"))
         {
@@ -43,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
             wantToStandUp = true;
         }
 
-        if(wantToStandUp && CanStandUp()) {
+        if (wantToStandUp && CanStandUp())
+        {
             Uncrouch();
             wantToStandUp = false;
         }
@@ -88,7 +101,27 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        animator.SetBool("isJumping", true);
+        jumping = true;
         rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+    }
+
+    private void CheckFalling()
+    {
+        if (rb.velocity.y >= 0) {
+            return;
+        }
+
+        animator.SetBool("isJumping", false);
+        animator.SetBool("isFalling", true);
+        jumping = false;
+        falling = true;
+    }
+
+    private void Land()
+    {
+        animator.SetBool("isFalling", false);
+        falling = false;
     }
 
     private bool IsOnGround()

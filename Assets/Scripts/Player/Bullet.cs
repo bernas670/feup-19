@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
     public float speed = 20f;
     public Rigidbody2D rb;
     public GameObject impactAnimation;
@@ -19,7 +18,8 @@ public class Bullet : MonoBehaviour
     {
         EnemyController enemy = hitInfo.GetComponent<EnemyController>();
 
-        if (enemy) {
+        if (enemy)
+        {
             enemy.TakeDamage();
         }
 
@@ -33,7 +33,8 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void CreateImpactEffect() {
+    private void CreateImpactEffect()
+    {
         GameObject impactObject = Instantiate(impactAnimation, transform.position, transform.rotation);
         LevelGenerator level = GameObject.Find("Level").GetComponent<LevelGenerator>();
         impactObject.transform.SetParent(level.GetCurrentStage());

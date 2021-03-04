@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class PlayerHealth : MonoBehaviour
 {
     private const int MAX_HEALTH = 3;
