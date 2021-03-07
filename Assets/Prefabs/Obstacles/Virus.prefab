@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1347471422395652149}
   - component: {fileID: 1347471422395652146}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Virus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 1347471422648289140}
   - component: {fileID: 1347471422648289141}
   - component: {fileID: 1347471422648289138}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1347471423387376701}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1347471423595817146}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Spot #2
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -239,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1347471423650951206}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Spot #1
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -269,7 +269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1347471424014139299}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Spot #3
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -299,7 +299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1347471424117918385}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Spot #4
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
