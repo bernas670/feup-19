@@ -59,8 +59,18 @@ public class LevelGenerator : MonoBehaviour
         return transf.Find("EndPosition").position + new Vector3(stageWidth / 2, 0, 0);
     }
 
-    public Transform GetCurrentStage()
+    public Transform GetStage(int index)
     {
-        return firstTransform;
+        switch (index)
+        {
+            case 0:
+                return firstTransform;
+            case 1:
+                return secondTransform;
+            case 2:
+                return thirdTransform;
+            default:
+                return null;
+        }
     }
 }

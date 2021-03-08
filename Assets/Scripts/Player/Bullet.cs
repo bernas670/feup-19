@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
     {
         GameObject impactObject = Instantiate(impactAnimation, transform.position, transform.rotation);
         LevelGenerator level = GameObject.Find("Level").GetComponent<LevelGenerator>();
-        impactObject.transform.SetParent(level.GetCurrentStage());
+        impactObject.transform.SetParent(level.GetStage(1));
         Destroy(impactObject, 0.4f);
     }
 }

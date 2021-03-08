@@ -722,7 +722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12, y: 0, z: -10}
+  m_LocalPosition: {x: -2.18, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1177,6 +1177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1240921026}
   - component: {fileID: 1240921025}
+  - component: {fileID: 1240921027}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -1196,7 +1197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4078bed24e1d384798916b75adfd337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage: {fileID: 2080505445092199930, guid: 65f1a655ca02062478fe14c5ef2447f9, type: 3}
+  stage: {fileID: 5132620592397582556, guid: 3668f7ef27a29eb449b18a8c8c207850, type: 3}
   startingStage: {fileID: 811299500}
   speed: 10
 --- !u!4 &1240921026
@@ -1213,6 +1214,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1240921027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240921024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a292679985d6a74791ce8fbafe8335a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnInterval: 2
+  xPos: 10
+  yPos:
+  - -4.1
+  - 0.96
+  enemyPrefab: {fileID: 6745946809837571488, guid: 07ea7e94b75e11c49aca853e7999b6ef,
+    type: 3}
+  generator: {fileID: 1240921025}
 --- !u!1001 &1300441701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1318,7 +1339,7 @@ GameObject:
   - component: {fileID: 1323336135}
   - component: {fileID: 1323336134}
   m_Layer: 0
-  m_Name: background
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
