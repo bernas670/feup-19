@@ -6,7 +6,10 @@ public class Weapon : MonoBehaviour
 {
 
     public Transform firePoint;
-    public GameObject bulletPrefab;
+    public GameObject defaultProjectile;
+
+    // the current projectile the player shoots
+    private GameObject currProjectile;
 
     // number of shots per second
     public float fireRate = 3f;
@@ -14,6 +17,7 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
+        currProjectile = defaultProjectile;
         lastShot = 1 / fireRate;
     }
 
@@ -38,7 +42,7 @@ public class Weapon : MonoBehaviour
     }
 
     void Shoot() {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(currProjectile, firePoint.position, firePoint.rotation);
     }
 
     public void ModifyFireRate(float multiplier, float duration) {
@@ -51,6 +55,17 @@ public class Weapon : MonoBehaviour
     private IEnumerator ResetFireRate(float value, float duration) {
         yield return new WaitForSeconds(duration);
         fireRate = value;
+    }
+
+    public void ChangeAmmo(GameObject projectilePrefab, float duration) {
+        currProjectile = projectilePrefab;
+
+        StartCoroutine(ResetAmmo(duration));
+    }
+
+    private IEnumerator ResetAmmo(float duration) {
+        yield return new WaitForSeconds(duration);
+        currProjectile = defaultProjectile;
     }
 
 }
