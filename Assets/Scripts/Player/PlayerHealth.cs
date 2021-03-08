@@ -57,6 +57,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        FindObjectOfType<GameManager>().GameOver();
+
+
         Debug.Log("DEAD");
     }
 }

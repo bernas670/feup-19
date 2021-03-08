@@ -30,6 +30,7 @@ public class HealthBar : MonoBehaviour
 
     public void RemoveHealth(int index)
     {
+        // FIXME: index out of bounds exception thrown here
         bar[index].GetComponent<Image>().sprite = emptyHeart;
     }
 
