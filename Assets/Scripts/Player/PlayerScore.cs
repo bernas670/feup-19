@@ -23,4 +23,8 @@ public class PlayerScore : MonoBehaviour
 
         timeAcc += Time.deltaTime;
     }
+
+    public int GetScore() {
+        return score;
+    }
 }
