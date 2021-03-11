@@ -12,15 +12,20 @@ public class LinearVirus : Virus
         Transform[] tempSpots = transform.GetChild(1).GetComponentsInChildren<Transform>();
         int counter = 0;
         spots = new Transform[tempSpots.Length - 1];
-        
+
+        // Select only the transforms of the children
         foreach (var spot in tempSpots)
         {
-            if(spot.gameObject.name.CompareTo("Path") == 0)
+            if (spot.gameObject.name.CompareTo("Path") == 0)
                 continue;
 
             spots.SetValue(spot, counter);
             counter++;
         }
+
+        //Randomly select a starting point to make it harder to predict
+        // currentSpot = Random.Range(0, spots.Length);
+        // nextSpot = (currentSpot + 1) % spots.Length;
 
         rb = transform.GetComponentInChildren<Rigidbody2D>();
         rb.position = spots[currentSpot].position;
@@ -29,7 +34,8 @@ public class LinearVirus : Virus
 
     void FixedUpdate()
     {
-        if (Vector3.Distance(rb.position, spots[nextSpot].position) <= 0.3f) {
+        if (Vector3.Distance(rb.position, spots[nextSpot].position) <= 0.3f)
+        {
             this.UpdateSpots();
             this.SetVelocity();
         }
