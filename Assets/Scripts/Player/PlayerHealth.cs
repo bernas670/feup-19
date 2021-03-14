@@ -10,7 +10,9 @@ public class PlayerHealth : MonoBehaviour
 
     private int health = MAX_HEALTH;
     private int shield = 0;
+    private bool invicible = false;
 
+    public int invicibilityDelay = 2; //in s
     public HealthBar healthBar;
     private Animator animator;
 
@@ -22,26 +24,17 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (invicible) return;
+
+        EnableInvincibility();
+
         if (shield > 0)
         {
-            shield--;
-            healthBar.RemoveShield(shield);
-
-            if (shield <= 0)
-            {
-                animator.SetBool("hasShield", false);
-            }
-        }
-        else
-        {
-            health--;
-            healthBar.RemoveHealth(health);
+            DamageShield();
+            return;
         }
 
-        if (health <= 0)
-        {
-            Die();
-        }
+        DamageHealth();
     }
 
     public void AddShield()
@@ -55,10 +48,50 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void DamageShield()
+    {
+        shield--;
+        healthBar.RemoveShield(shield);
+
+        if (shield <= 0)
+        {
+            animator.SetBool("hasShield", false);
+        }
+    }
+    
+    private void DamageHealth()
+    {
+        health--;
+        healthBar.RemoveHealth(health);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void EnableInvincibility()
+    {
+        invicible = true;
+        animator.SetBool("isInvincible", true);
+        // Will disable the invicibility after "invicibilityDelay" seconds
+        StartCoroutine(DisableInvincibility());
+        Debug.Log("Gained Invicibility");
+    }
+
+    private IEnumerator DisableInvincibility()
+    {
+        yield return new WaitForSeconds(invicibilityDelay);
+        invicible = false;
+        animator.SetBool("isInvincible", false);
+
+        Debug.Log("Lost Invicibility");
+    }
+
     private void Die()
     {
+        animator.SetBool("isDead", true);
         FindObjectOfType<GameManager>().GameOver();
-
 
         Debug.Log("DEAD");
     }
