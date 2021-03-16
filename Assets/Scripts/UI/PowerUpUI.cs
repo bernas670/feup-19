@@ -27,7 +27,6 @@ public class PowerUpUI : MonoBehaviour
             bar = Instantiate(prefab, new Vector3(xOffset, currentIndex * yOffset, 0), Quaternion.identity);
             bar.transform.SetParent(transform, false);
             activePowerUps[currentIndex] = bar;
-            currentIndex++;
         }
 
         StartCoroutine(AnimateSlider(bar, duration));
