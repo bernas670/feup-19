@@ -1213,8 +1213,8 @@ MonoBehaviour:
   spawnInterval: 3
   xPos: 10
   yPos:
-  - -4.1
-  - 0.96
+  - -3.68
+  - 1.38
   enemyPrefab: {fileID: 6745946809837571488, guid: 07ea7e94b75e11c49aca853e7999b6ef,
     type: 3}
   generator: {fileID: 1240921025}

@@ -5,7 +5,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public float spawnInterval = 2; //in s
     public float xPos = 10; //in s
-    public float[] yPos = new float[] { -4.1f, 0.96f }; //in s
+    public float[] yPos = new float[] { -3.68f, 1.38f }; //in s
 
     public GameObject enemyPrefab;
     public LevelGenerator generator;
