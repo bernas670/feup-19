@@ -30,18 +30,26 @@ public class HealthBar : MonoBehaviour
 
     public void RemoveHealth(int index)
     {
-        // FIXME: index out of bounds exception thrown here
+        if (index < 0 || index >= bar.Length)
+            return;
+
         bar[index].GetComponent<Image>().sprite = emptyHeart;
     }
 
     public void AddShield(int index)
     {
         int shieldIndex = index + maxHealth;
+        if (shieldIndex < 0 || shieldIndex >= bar.Length)
+            return;
+
         bar.SetValue(CreateIcon(new Vector3(offset, 0, 0) * shieldIndex, fullShield), shieldIndex);
     }
 
     public void RemoveShield(int index)
     {
+        if (index < 0 || index >= bar.Length)
+            return;
+
         Destroy(bar[index + maxHealth]);
     }
 

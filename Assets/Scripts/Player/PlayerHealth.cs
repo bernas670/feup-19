@@ -76,7 +76,6 @@ public class PlayerHealth : MonoBehaviour
         animator.SetBool("isInvincible", true);
         // Will disable the invicibility after "invicibilityDelay" seconds
         StartCoroutine(DisableInvincibility());
-        Debug.Log("Gained Invicibility");
     }
 
     private IEnumerator DisableInvincibility()
@@ -84,8 +83,6 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(invicibilityDelay);
         invicible = false;
         animator.SetBool("isInvincible", false);
-
-        Debug.Log("Lost Invicibility");
     }
 
     private void Die()

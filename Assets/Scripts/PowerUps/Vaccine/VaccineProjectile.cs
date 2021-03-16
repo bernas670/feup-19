@@ -11,10 +11,10 @@ public class VaccineProjectile : MonoBehaviour
 
     void Start()
     {
-        rb.velocity = transform.right * speed;        
+        rb.velocity = transform.right * speed;
     }
 
-        private void OnTriggerEnter2D(Collider2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         EnemyController enemy = hitInfo.GetComponent<EnemyController>();
 

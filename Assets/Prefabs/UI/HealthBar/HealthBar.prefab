@@ -48,8 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c48671be543da4e893334840d8d6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 7467488644241915491, guid: fc99045688fb7ef4a99bf851b4146d51, type: 3}
-  fullHeart: {fileID: 21300000, guid: 5d4c76ec3554cf34caa767dbd36b74ad, type: 3}
-  emptyHeart: {fileID: 21300000, guid: 496f2ffcbdae65645b62eefafa180a12, type: 3}
-  fullShield: {fileID: 21300000, guid: e6b06aca11da7644e954d093701ec0d0, type: 3}
-  emptyShield: {fileID: 21300000, guid: d0ffcd34082c25745ba530654a4e08c9, type: 3}
+  offset: 40
+  iconPrefab: {fileID: 7467488644241915491, guid: fc99045688fb7ef4a99bf851b4146d51,
+    type: 3}
+  fullHeart: {fileID: 21300000, guid: fc936c8c39ccc9146ae0948942639d72, type: 3}
+  emptyHeart: {fileID: 21300000, guid: af6267c81d4d99042a98511ae38d91ce, type: 3}
+  fullShield: {fileID: 21300000, guid: 69880cf22f714d24fa52cbde7c928fa5, type: 3}
