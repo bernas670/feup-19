@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float firstSpawnInterval = 3;
     public float spawnInterval = 2; //in s
     public float xPos = 10; //in s
     public float[] yPos = new float[] { -3.68f, 1.38f }; //in s
@@ -18,6 +19,8 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator EnemySpawn()
     {
+        yield return new WaitForSeconds(firstSpawnInterval);
+
         while (true)
         {
             // 0 -> lower level

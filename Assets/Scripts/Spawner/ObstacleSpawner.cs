@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
+    public float firstSpawnInterval = 3;
     public float spawnInterval = 4; //in s
     public float xPos = 10;
     public SpawnableObstacle[] obstacles;
@@ -16,6 +17,8 @@ public class ObstacleSpawner : MonoBehaviour
 
     IEnumerator ObstacleSpawn()
     {
+        yield return new WaitForSeconds(firstSpawnInterval);
+
         while (true)
         {
             int chosenIndex = Random.Range(0, obstacles.Length);
