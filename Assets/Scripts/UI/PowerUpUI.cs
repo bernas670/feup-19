@@ -50,7 +50,10 @@ public class PowerUpUI : MonoBehaviour
     private void RemoveBar(GameObject bar)
     {
         activePowerUps.Remove(bar);
-        activePowerUps.ForEach(activeBar => activeBar.transform.localPosition += Vector3.up * yOffset);
+        activePowerUps.ForEach(activeBar => {
+            if(activeBar.transform.localPosition.y < 0)
+                activeBar.transform.localPosition += Vector3.up * yOffset;
+        });
     }
 
     private IEnumerator AnimateSlider(GameObject bar, float duration)

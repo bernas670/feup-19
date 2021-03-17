@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PowerUpSpawner : MonoBehaviour
 {
+    public float firstSpawnInterval = 3;
     public float spawnInterval = 4; //in s
     public float xPos = 9;
     public float yPos = -1.5f;
@@ -18,6 +19,8 @@ public class PowerUpSpawner : MonoBehaviour
 
     IEnumerator PowerUpSpawn()
     {
+        yield return new WaitForSeconds(firstSpawnInterval);
+
         while (true)
         {
             int chosenIndex = Random.Range(0, powerUpPrefabs.Length);
