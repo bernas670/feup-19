@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-
     public Transform firePoint;
     public GameObject defaultProjectile;
-
-    // the current projectile the player shoots
-    private GameObject currProjectile;
-
     // number of shots per second
     public float fireRate = 3f;
+    // the current projectile the player shoots
+    private GameObject currProjectile;
+    private IEnumerator activeAmmoRoutine;
     private float lastShot;
 
     void Awake()
@@ -32,40 +30,49 @@ public class Weapon : MonoBehaviour
 
         lastShot += Time.deltaTime;
 
-
-        if (Input.GetButtonDown("Fire1")) {
-            if (lastShot >= 1 / fireRate) {
-            Shoot();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (lastShot >= 1 / fireRate)
+            {
+                Shoot();
                 lastShot = 0;
             }
         }
     }
 
-    void Shoot() {
+    void Shoot()
+    {
         GameObject bullet = Instantiate(currProjectile, firePoint.position, firePoint.rotation);
     }
 
-    public void ModifyFireRate(float multiplier, float duration) {
-        float originalFireRate = fireRate;
+    public void ModifyFireRate(float multiplier, float duration)
+    {
         fireRate *= multiplier;
 
-        StartCoroutine(ResetFireRate(originalFireRate, duration));
+        StartCoroutine(ResetFireRate(multiplier, duration));
     }
 
-    private IEnumerator ResetFireRate(float value, float duration) {
+    private IEnumerator ResetFireRate(float multiplier, float duration)
+    {
         yield return new WaitForSeconds(duration);
-        fireRate = value;
+        fireRate /= multiplier;
     }
 
-    public void ChangeAmmo(GameObject projectilePrefab, float duration) {
+    public void ChangeAmmo(GameObject projectilePrefab, float duration)
+    {
         currProjectile = projectilePrefab;
 
-        StartCoroutine(ResetAmmo(duration));
+        if(activeAmmoRoutine != null) {
+            StopCoroutine(activeAmmoRoutine);
+        }
+
+        activeAmmoRoutine = ResetAmmo(duration);
+        StartCoroutine(activeAmmoRoutine);
     }
 
-    private IEnumerator ResetAmmo(float duration) {
+    private IEnumerator ResetAmmo(float duration)
+    {
         yield return new WaitForSeconds(duration);
         currProjectile = defaultProjectile;
     }
-
 }
