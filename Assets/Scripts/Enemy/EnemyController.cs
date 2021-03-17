@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
 
     private Renderer rndr;
 
-    void Awake()
+    private void Awake()
     {
         player = GameObject.FindGameObjectsWithTag("Player")[0];
         rndr = GetComponent<Renderer>();
@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
         lastShot = 1 / fireRate;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (rndr.isVisible)
         {
@@ -36,15 +36,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Destroy(gameObject);
+        PlayerHealth player = hitInfo.GetComponent<PlayerHealth>();
 
-        PlayerScore score = player.GetComponent<PlayerScore>();
-        score.UpdateScore(100);
+        if (player)
+        {
+            player.TakeDamage();
+            this.TakeDamage();
+        }
     }
 
-    void Shoot()
+    private void Shoot()
     {
         Vector3 playerDir = (player.transform.position - transform.position).normalized;
         float ang = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
@@ -52,5 +55,13 @@ public class EnemyController : MonoBehaviour
 
         GameObject projectileInst = Instantiate(projectile, transform.position, rotation);
         projectileInst.transform.SetParent(transform.parent);
+    }
+
+    public void TakeDamage()
+    {
+        Destroy(gameObject);
+
+        PlayerScore score = player.GetComponent<PlayerScore>();
+        score.UpdateScore(100);
     }
 }
