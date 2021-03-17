@@ -124,3 +124,5 @@ MonoBehaviour:
   duration: 8
   projectilePrefab: {fileID: 2721741874446496577, guid: 523bc45c0a56ce44abb5a974717003f1,
     type: 3}
+  uiBarPrefab: {fileID: 3247610799271689104, guid: fd7b09239939c6a4dae29d4c8b994322,
+    type: 3}

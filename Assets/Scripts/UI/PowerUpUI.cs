@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class PowerUpUI : MonoBehaviour
 {
     public int xOffset = 65;
-    public int yOffset = -48;
-    public GameObject prefab;
+    public int yOffset = 48;
     private List<GameObject> activePowerUps;
 
     private void Awake()
@@ -16,7 +15,7 @@ public class PowerUpUI : MonoBehaviour
         activePowerUps = new List<GameObject>();
     }
 
-    public void AddVaccineBar(float duration)
+    public void AddVaccineBar(GameObject barPrefab, float duration)
     {
         GameObject bar = activePowerUps.Find(power => power.name == "VaccineBar(Clone)");
 
@@ -26,7 +25,17 @@ public class PowerUpUI : MonoBehaviour
             return;
         }
 
-        bar = Instantiate(prefab, new Vector3(xOffset, activePowerUps.Count * yOffset, 0), Quaternion.identity);
+        InstantiateBar(barPrefab, duration);
+    }
+
+    public void AddFireRateBar(GameObject barPrefab, float duration)
+    {
+        InstantiateBar(barPrefab, duration);
+    }
+
+    private void InstantiateBar(GameObject bar, float duration)
+    {
+        bar = Instantiate(bar, new Vector3(xOffset, activePowerUps.Count * -yOffset, 0), Quaternion.identity);
         bar.transform.SetParent(transform, false);
         activePowerUps.Add(bar);
         StartCoroutine(AnimateSlider(bar, duration));
@@ -41,7 +50,8 @@ public class PowerUpUI : MonoBehaviour
     private void RemoveBar(GameObject bar)
     {
         activePowerUps.Remove(bar);
-        activePowerUps.ForEach(activeBar => activeBar.transform.Translate(0, -yOffset, 0));
+        Debug.Log(yOffset);
+        activePowerUps.ForEach(activeBar => activeBar.transform.localPosition += Vector3.up * yOffset);
     }
 
     private IEnumerator AnimateSlider(GameObject bar, float duration)

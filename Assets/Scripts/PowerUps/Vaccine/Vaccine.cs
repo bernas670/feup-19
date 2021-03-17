@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Vaccine : MonoBehaviour
 {
-    // duration of the power up in seconds
-    public float duration = 8f;
+    public float duration = 8f; // duration of the power up in seconds
     public GameObject projectilePrefab;
+    public GameObject uiBarPrefab;
 
     private PowerUpUI powerUpUI;
 
@@ -23,7 +21,7 @@ public class Vaccine : MonoBehaviour
         {
             if (powerUpUI)
             {
-                powerUpUI.AddVaccineBar(duration);
+                powerUpUI.AddVaccineBar(uiBarPrefab, duration);
             }
 
             weapon.ChangeAmmo(projectilePrefab, duration);
