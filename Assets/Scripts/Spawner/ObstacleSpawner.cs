@@ -5,9 +5,7 @@ public class ObstacleSpawner : MonoBehaviour
 {
     public float spawnInterval = 4; //in s
     public float xPos = 10;
-    public float[] yPos;
-
-    public GameObject[] obstaclePrefabs;
+    public SpawnableObstacle[] obstacles;
     public LevelGenerator generator;
 
     // Start is called before the first frame update
@@ -20,11 +18,10 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while (true)
         {
-            //FIXME: the chosen index selects both the yPos and the Prefab. Any idea to couple both?
-            int chosenIndex = Random.Range(0, obstaclePrefabs.Length);
+            int chosenIndex = Random.Range(0, obstacles.Length);
+            SpawnableObstacle obstacle = obstacles[chosenIndex];
 
-            //TODO: if index == Length then Generate Nothing??
-            InstantiateObstacle(obstaclePrefabs[chosenIndex],new Vector3(xPos, yPos[chosenIndex], 0));
+            InstantiateObstacle(obstacle.prefab, new Vector3(xPos, obstacle.yPos, 0));
 
             yield return new WaitForSeconds(spawnInterval);
         }

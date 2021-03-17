@@ -1246,14 +1246,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnInterval: 2
   xPos: 10
-  yPos:
-  - 0
-  - -4
-  - -1.5
-  obstaclePrefabs:
-  - {fileID: 1347471422395652147, guid: 1f27c2bf432ad1c4d8b8ab3b3e794067, type: 3}
-  - {fileID: 1347471422395652147, guid: c9099015961e2ff48bcee1070a7f2cb1, type: 3}
-  - {fileID: 1347471422395652147, guid: 8b448b446f8cf6b43b48f3083ff355fc, type: 3}
+  obstacles:
+  - prefab: {fileID: 1347471422395652147, guid: 1f27c2bf432ad1c4d8b8ab3b3e794067,
+      type: 3}
+    yPos: 0
+  - prefab: {fileID: 1347471422395652147, guid: c9099015961e2ff48bcee1070a7f2cb1,
+      type: 3}
+    yPos: -4
+  - prefab: {fileID: 1347471422395652147, guid: 8b448b446f8cf6b43b48f3083ff355fc,
+      type: 3}
+    yPos: -1.5
   generator: {fileID: 1240921025}
 --- !u!1 &1323336133
 GameObject:
