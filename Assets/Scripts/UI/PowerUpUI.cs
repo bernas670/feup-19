@@ -50,7 +50,6 @@ public class PowerUpUI : MonoBehaviour
     private void RemoveBar(GameObject bar)
     {
         activePowerUps.Remove(bar);
-        Debug.Log(yOffset);
         activePowerUps.ForEach(activeBar => activeBar.transform.localPosition += Vector3.up * yOffset);
     }
 
