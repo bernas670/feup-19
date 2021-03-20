@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.isPaused || GameManager.gameOver) return;
+        
         state.update();
     }
 

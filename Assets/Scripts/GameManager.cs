@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameOverScreen gameOverScreen;
     public static bool isPaused = false;
-    private bool gameOver = false;
+    public static bool gameOver = false;
 
     private void Awake() {
         Time.timeScale = 1f;
