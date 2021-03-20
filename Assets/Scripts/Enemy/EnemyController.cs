@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour
 
     private void Shoot()
     {
-        Vector3 playerDir = (player.transform.position - transform.position).normalized;
+        Vector3 playerDir = (player.transform.position + new Vector3(2,0,0) - transform.position).normalized;
         float ang = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(0, 0, ang);
 
