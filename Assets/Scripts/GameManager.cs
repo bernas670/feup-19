@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+    public MouseCursor customCursor;
     public GameObject gameUI;
     public GameObject pauseMenuUI;
     public GameOverScreen gameOverScreen;
@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         Time.timeScale = 1f;
+        isPaused = false;
+        gameOver = false;
+        customCursor.Enable();
     }
 
     private void Update()
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void Resume()
     {
+        customCursor.Enable();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -39,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+        customCursor.Disable();
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -59,6 +64,7 @@ public class GameManager : MonoBehaviour
         if (!gameOver) {
             gameOver = true;
             Time.timeScale = 0f;
+            customCursor.Disable();
             gameUI.SetActive(false);
             gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore());
         }
