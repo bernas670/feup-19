@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameUI;
     public GameObject pauseMenuUI;
     public GameOverScreen gameOverScreen;
-    public static bool isPaused = true;
+    public static bool isPaused = false;
     private bool gameOver = false;
 
     private void Awake() {
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && !gameOver)
         {
             Debug.Log("Pressed Esc");
             if(isPaused)
@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void LoadMainMenu() {
+        isPaused = false;
+        gameOver = false;
         SceneManager.LoadScene("MainMenu");
     }
 
