@@ -1,16 +1,25 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public MouseCursor customCursor;
     public GameObject gameUI;
+    public Text timerText;
     public GameObject pauseMenuUI;
     public GameOverScreen gameOverScreen;
     public static bool isPaused = false;
     public static bool gameOver = false;
 
-    private void Awake() {
+    private float timer;
+
+    private void Awake()
+    {
+        timer = 0f;
+        timerText.text = TimeSpan.FromSeconds(timer).ToString(@"mm\:ss\.f");
+
         Time.timeScale = 1f;
         isPaused = false;
         gameOver = false;
@@ -19,13 +28,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !gameOver)
+        timer += Time.deltaTime;
+        timerText.text = TimeSpan.FromSeconds(timer).ToString(@"mm\:ss\.f");
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameOver)
         {
-            Debug.Log("Pressed Esc");
-            if(isPaused)
+            if (isPaused)
             {
                 Resume();
-            } else
+            }
+            else
             {
                 Pause();
             }
@@ -49,24 +61,28 @@ public class GameManager : MonoBehaviour
         isPaused = true;
     }
 
-    public void LoadMainMenu() {
+    public void LoadMainMenu()
+    {
         isPaused = false;
         gameOver = false;
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void QuitGame() {
+    public void QuitGame()
+    {
         Debug.Log("Quit game");
         Application.Quit();
     }
 
-    public void GameOver() {
-        if (!gameOver) {
+    public void GameOver()
+    {
+        if (!gameOver)
+        {
             gameOver = true;
             Time.timeScale = 0f;
             customCursor.Disable();
             gameUI.SetActive(false);
-            gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore());
+            gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore(), timer);
         }
     }
 }

@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
         if (invicible) return;
 
         EnableInvincibility();
+        AudioManager.instance.Play("Damage");
 
         if (shield > 0)
         {
