@@ -956,6 +956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1033353728}
   timerText: {fileID: 277661027}
+  inputDelay: 1
 --- !u!114 &638766362
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,3 +50,9 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Damage
+    clip: {fileID: 8300000, guid: ee1b57837c1c4ef43a6cbd64b033d67b, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
