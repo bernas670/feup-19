@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
     public static bool isPaused = false;
     public static bool gameOver = false;
 
+    private HighScoreManager highScoreManager;
     private float timer;
 
     private void Awake()
     {
         timer = 0f;
         timerText.text = TimeSpan.FromSeconds(timer).ToString(@"mm\:ss\.f");
+
+        highScoreManager = HighScoreManager.instance;
 
         Time.timeScale = 1f;
         isPaused = false;
@@ -76,13 +79,22 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (!gameOver)
+        if (gameOver) return;
+
+        PlayerScore player = FindObjectOfType<PlayerScore>();
+
+        if (highScoreManager.isHighScore(player.GetScore(), timer))
         {
-            gameOver = true;
-            Time.timeScale = 0f;
-            customCursor.Disable();
-            gameUI.SetActive(false);
-            gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore(), timer);
+            //Show menu
+            highScoreManager.AddHighScore("CAJO", player.GetScore(), timer);
+            highScoreManager.SaveHighScores();
+            Debug.Log(highScoreManager);
         }
+
+        gameOver = true;
+        Time.timeScale = 0f;
+        customCursor.Disable();
+        gameUI.SetActive(false);
+        gameOverScreen.Setup(player.GetScore(), timer);
     }
 }
