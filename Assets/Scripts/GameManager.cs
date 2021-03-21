@@ -5,11 +5,12 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public Text timerText;
     public MouseCursor customCursor;
     public GameObject gameUI;
-    public Text timerText;
     public GameObject pauseMenuUI;
     public GameOverScreen gameOverScreen;
+    public NewHighScoreScreen newHighScoreScreen;
     public static bool isPaused = false;
     public static bool gameOver = false;
 
@@ -55,7 +56,6 @@ public class GameManager : MonoBehaviour
         isPaused = false;
     }
 
-
     public void Pause()
     {
         customCursor.Disable();
@@ -81,20 +81,24 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver) return;
 
-        PlayerScore player = FindObjectOfType<PlayerScore>();
-
-        if (highScoreManager.isHighScore(player.GetScore(), timer))
-        {
-            //Show menu
-            highScoreManager.AddHighScore("CAJO", player.GetScore(), timer);
-            highScoreManager.SaveHighScores();
-            Debug.Log(highScoreManager);
-        }
-
         gameOver = true;
         Time.timeScale = 0f;
         customCursor.Disable();
         gameUI.SetActive(false);
-        gameOverScreen.Setup(player.GetScore(), timer);
+
+        PlayerScore player = FindObjectOfType<PlayerScore>();
+
+        if (highScoreManager.isHighScore(player.GetScore(), timer))
+        {
+            newHighScoreScreen.Setup(player.GetScore(), timer);
+            return;
+        }
+
+        LoadGameOverScreen();
+    }
+
+    public void LoadGameOverScreen()
+    {
+        gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore(), timer);
     }
 }
