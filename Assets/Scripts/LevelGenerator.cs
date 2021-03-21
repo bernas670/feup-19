@@ -36,7 +36,6 @@ public class LevelGenerator : MonoBehaviour
         if (firstTransform.Find("EndPosition").position.x < (-stageWidth / 2))
         {
             Destroy(firstStage);
-            // Debug.Log("Stage Destroyed!");
 
             firstStage = secondStage;
             firstTransform = secondTransform;

@@ -20,7 +20,6 @@ public class Virus : MonoBehaviour
         }
 
         VaccineProjectile vaccine = other.GetComponent<VaccineProjectile>();
-        Debug.Log(vaccine);
         if (vaccine)
         {
             PlayerScore score = this.player.GetComponent<PlayerScore>();

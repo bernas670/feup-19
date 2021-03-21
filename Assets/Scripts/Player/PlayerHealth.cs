@@ -88,7 +88,5 @@ public class PlayerHealth : MonoBehaviour
     {
         animator.SetBool("isDead", true);
         FindObjectOfType<GameManager>().GameOver();
-
-        Debug.Log("DEAD");
     }
 }

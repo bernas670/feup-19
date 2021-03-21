@@ -11,7 +11,6 @@ public class MainMenu : MonoBehaviour
     }
 
     public void PlayGame() {
-        Debug.Log("play game");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
