@@ -9,15 +9,17 @@ public class GameOverScreen : MonoBehaviour
     public Text scoreText;
     public Text timerText;
     public int inputDelay = 1;
-    private bool inputEnabled = false;
+    private bool inputEnabled;
 
-    public void Setup(int score, float time)
+    public void Setup(int score, float time, bool activateDelay)
     {
         gameObject.SetActive(true);
         scoreText.text = string.Format("Score: {0}", score);
         timerText.text = "Time: " + TimeSpan.FromSeconds(time).ToString(@"mm\:ss\.f");
         
-        StartCoroutine(EnableInput());
+        inputEnabled = !activateDelay;
+        if(activateDelay)
+            StartCoroutine(EnableInput());
     }
 
     private IEnumerator EnableInput()

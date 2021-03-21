@@ -94,11 +94,11 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        LoadGameOverScreen();
+        LoadGameOverScreen(true);
     }
 
-    public void LoadGameOverScreen()
+    public void LoadGameOverScreen(bool activateDelay)
     {
-        gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore(), timer);
+        gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore(), timer, activateDelay);
     }
 }

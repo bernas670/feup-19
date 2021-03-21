@@ -50,7 +50,7 @@ public class NewHighScoreScreen : MonoBehaviour
 
     private void LoadGameOver()
     {
-        FindObjectOfType<GameManager>().LoadGameOverScreen();
+        FindObjectOfType<GameManager>().LoadGameOverScreen(false);
         gameObject.SetActive(false);
     }
 
