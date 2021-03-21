@@ -3,12 +3,31 @@
 public class Virus : MonoBehaviour
 {
     public float speed = 10f;
+    private GameObject player;
 
-    public void OnTriggerEnter2DChild(Collider2D other) {
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+    }
+
+    public void OnTriggerEnter2DChild(Collider2D other)
+    {
         PlayerHealth player = other.GetComponent<PlayerHealth>();
 
-        if (player) {
+        if (player)
+        {
             player.TakeDamage();
         }
+
+        VaccineProjectile vaccine = other.GetComponent<VaccineProjectile>();
+        Debug.Log(vaccine);
+        if (vaccine)
+        {
+            PlayerScore score = this.player.GetComponent<PlayerScore>();
+            score.UpdateScore(200);
+
+            Destroy(gameObject);
+        }
+
     }
 }
