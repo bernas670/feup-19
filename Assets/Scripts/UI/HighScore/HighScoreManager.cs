@@ -75,6 +75,11 @@ public class HighScoreManager : MonoBehaviour
         SaveSystem.SaveHighScores(arr);
     }
 
+    public SortedSet<HighScoreRowData> getRows()
+    {
+        return rows;
+    }
+
     public override string ToString()
     {
         string str = "SortedSet contents:\n";
