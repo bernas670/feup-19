@@ -10,16 +10,18 @@ public class GameManager : MonoBehaviour
     public Text timerText;
     public GameObject pauseMenuUI;
     public GameOverScreen gameOverScreen;
-    public HighScoreManager highScoreManager;
     public static bool isPaused = false;
     public static bool gameOver = false;
 
+    private HighScoreManager highScoreManager;
     private float timer;
 
     private void Awake()
     {
         timer = 0f;
         timerText.text = TimeSpan.FromSeconds(timer).ToString(@"mm\:ss\.f");
+
+        highScoreManager = HighScoreManager.instance;
 
         Time.timeScale = 1f;
         isPaused = false;
@@ -81,7 +83,13 @@ public class GameManager : MonoBehaviour
 
         PlayerScore player = FindObjectOfType<PlayerScore>();
 
-        highScoreManager.isHighScore(player.GetScore(), timer);
+        if (highScoreManager.isHighScore(player.GetScore(), timer))
+        {
+            //Show menu
+            highScoreManager.AddHighScore("CAJO", player.GetScore(), timer);
+            highScoreManager.SaveHighScores();
+            Debug.Log(highScoreManager);
+        }
 
         gameOver = true;
         Time.timeScale = 0f;

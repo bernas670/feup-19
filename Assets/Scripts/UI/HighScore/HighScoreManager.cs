@@ -24,20 +24,11 @@ public class HighScoreManager : MonoBehaviour
         if (data == null)
         {
             rows = new SortedSet<HighScoreRowData>(new HighScoreComparator());
-            rows.Add(new HighScoreRowData("AAA", 1, 10));
-            rows.Add(new HighScoreRowData("BBB", 1, 15));
-            rows.Add(new HighScoreRowData("CCC", 2, 15));
-            rows.Add(new HighScoreRowData("DDD", 3, 15));
-            rows.Add(new HighScoreRowData("EEE", 4, 10));
-            rows.Add(new HighScoreRowData("FFF", 4, 15));
-            rows.Add(new HighScoreRowData("GGG", 4, 20));
-            rows.Add(new HighScoreRowData("HHH", 1, 15));
-            rows.Add(new HighScoreRowData("III", 1, 15));
-            rows.Add(new HighScoreRowData("JJJ", 5, 2));
         }
         else
         {
             rows = new SortedSet<HighScoreRowData>(data, new HighScoreComparator());
+            Debug.Log(this);
         }
 
         DontDestroyOnLoad(gameObject);
@@ -53,11 +44,6 @@ public class HighScoreManager : MonoBehaviour
         //When considering a new high score we do not take into account the name of the player
         HighScoreRowData row = new HighScoreRowData("ZZZZZ", score, time);
 
-        // TODO: delete these lines
-        // Debug.Log("Max is: " + rows.Max.getScore());
-        // Debug.Log("Min is: " + rows.Min.getScore());
-        // Debug.Log("Candidate is: " + score);
-
         // Since the list is sorted in ascending order,
         // but we want the highest score first, then
         // the last row is the Max value from the set
@@ -65,8 +51,6 @@ public class HighScoreManager : MonoBehaviour
 
         if (new HighScoreComparator().Compare(row, lastRow) < 0)
         {
-            // TODO: delete Log
-            Debug.Log("Candidate is Highscore");
             return true;
         }
 
@@ -75,16 +59,18 @@ public class HighScoreManager : MonoBehaviour
 
     public void AddHighScore(string name, int score, float time)
     {
-        rows.Remove(rows.Max);
-
         HighScoreRowData row = new HighScoreRowData(name, score, time);
-        Debug.Log("New Score: " + row);
         rows.Add(row);
+
+        if (rows.Count > numberHighScores)
+        {
+            rows.Remove(rows.Max);
+        }
     }
 
     public void SaveHighScores()
     {
-        HighScoreRowData[] arr = new HighScoreRowData[numberHighScores];
+        HighScoreRowData[] arr = new HighScoreRowData[rows.Count];
         rows.CopyTo(arr);
         SaveSystem.SaveHighScores(arr);
     }
@@ -99,6 +85,20 @@ public class HighScoreManager : MonoBehaviour
         }
 
         return str;
+    }
+
+    private void PopulateRows()
+    {
+        rows.Add(new HighScoreRowData("AAA", 1, 10));
+        rows.Add(new HighScoreRowData("BBB", 1, 15));
+        rows.Add(new HighScoreRowData("CCC", 2, 15));
+        rows.Add(new HighScoreRowData("DDD", 3, 15));
+        rows.Add(new HighScoreRowData("EEE", 4, 10));
+        rows.Add(new HighScoreRowData("FFF", 4, 15));
+        rows.Add(new HighScoreRowData("GGG", 4, 20));
+        rows.Add(new HighScoreRowData("HHH", 1, 15));
+        rows.Add(new HighScoreRowData("III", 1, 15));
+        rows.Add(new HighScoreRowData("JJJ", 5, 2));
     }
 
     private class HighScoreComparator : IComparer<HighScoreRowData>
