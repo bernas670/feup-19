@@ -28,7 +28,6 @@ public class HighScoreManager : MonoBehaviour
         else
         {
             rows = new SortedSet<HighScoreRowData>(data, new HighScoreComparator());
-            Debug.Log(this);
         }
 
         DontDestroyOnLoad(gameObject);
