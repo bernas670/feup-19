@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Text timerText;
     public GameObject pauseMenuUI;
     public GameOverScreen gameOverScreen;
+    public HighScoreManager highScoreManager;
     public static bool isPaused = false;
     public static bool gameOver = false;
 
@@ -76,13 +77,16 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (!gameOver)
-        {
-            gameOver = true;
-            Time.timeScale = 0f;
-            customCursor.Disable();
-            gameUI.SetActive(false);
-            gameOverScreen.Setup(FindObjectOfType<PlayerScore>().GetScore(), timer);
-        }
+        if (gameOver) return;
+
+        PlayerScore player = FindObjectOfType<PlayerScore>();
+
+        highScoreManager.isHighScore(player.GetScore(), timer);
+
+        gameOver = true;
+        Time.timeScale = 0f;
+        customCursor.Disable();
+        gameUI.SetActive(false);
+        gameOverScreen.Setup(player.GetScore(), timer);
     }
 }
