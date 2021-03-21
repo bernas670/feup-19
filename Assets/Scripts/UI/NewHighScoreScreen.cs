@@ -41,8 +41,6 @@ public class NewHighScoreScreen : MonoBehaviour
 
     public void SaveButton()
     {
-        Debug.Log("Clicked save");
-        Debug.Log(inputText.text);
         if (inputEnabled && inputText.text.CompareTo("") != 0)
         {
             SaveScore(inputText.text);
@@ -60,6 +58,5 @@ public class NewHighScoreScreen : MonoBehaviour
     {
         highScoreManager.AddHighScore(name, score, time);
         highScoreManager.SaveHighScores();
-        Debug.Log(highScoreManager);
     }
 }
